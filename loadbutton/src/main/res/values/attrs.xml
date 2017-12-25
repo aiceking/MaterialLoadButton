@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialLoadButton">
+        <attr name="load_btnNormalColor" format="reference|color" />
+        <attr name="load_btnText" format="reference|string" />
+        <attr name="load_textColor" format="reference|color" />
+        <attr name="load_resetAfterFailed" format="boolean" />
+        <attr name="load_btnRippleColor" format="reference|color" />
+        <attr name="load_btnRippleAlpha" format="float" />
+        <attr name="load_btnEnabledColor" format="reference|color" />
+        <attr name="load_EnabledTextColor" format="reference|color" />
+        <attr name="load_btnRadius" format="dimension" />
+        <attr name="load_loadWidth" format="dimension" />
+        <attr name="load_loadColor" format="reference|color" />
+        <attr name="load_loadSuccessColor" format="reference|color" />
+        <attr name="load_loadFailedColor" format="reference|color" />
+    </declare-styleable>
+</resources>
