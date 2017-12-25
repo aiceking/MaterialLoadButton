@@ -13,6 +13,7 @@
        android:layout_margin="10dp"
        app:load_resetAfterFailed="true"
        app:load_btnText="登陆"
+       app:load_textSize="20sp"
        app:load_EnabledTextColor="@color/colorPrimary"
        app:load_btnEnabledColor="#000000"
        app:load_btnNormalColor="@color/colorPrimary"

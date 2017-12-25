@@ -73,12 +73,11 @@ public class MaterialLoadButton extends View {
     private float mDensity;
     private float mButtonCorner;
     private float loadWidth;
+    private float textSize;
     private int mRadius;
     private int width;
     private int height;
     private Matrix mMatrix = new Matrix();
-    private float mTextWidth,mTextHeight;
-
     private Path mSuccessPath;
     private float mSuccessPathLength;
     private float[] mSuccessPathIntervals;
@@ -130,6 +129,7 @@ public class MaterialLoadButton extends View {
             mLoadColor=ta.getColor(R.styleable.MaterialLoadButton_load_loadColor,Color.BLUE);
             mLoadSuccessColor=ta.getColor(R.styleable.MaterialLoadButton_load_loadSuccessColor,Color.GREEN);
             mLoadFailedColor=ta.getColor(R.styleable.MaterialLoadButton_load_loadFailedColor,Color.RED);
+            textSize=ta.getDimension(R.styleable.MaterialLoadButton_load_textSize,16*mDensity);
             ta.recycle();
         }
 
@@ -162,12 +162,9 @@ public class MaterialLoadButton extends View {
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
         mTextPaint.setColor(mTextColor);
-        mTextPaint.setTextSize(16*mDensity);
+        mTextPaint.setTextSize(textSize);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setFakeBoldText(true);
-        mTextWidth = mTextPaint.measureText(mText);
-        Rect bounds = new Rect();
-        mTextPaint.getTextBounds(mText,0,mText.length(),bounds);
-        mTextHeight = bounds.height();
 
         mPathEffectPaint = new Paint();
         mPathEffectPaint.setAntiAlias(true);
@@ -346,10 +343,6 @@ public class MaterialLoadButton extends View {
             return;
         }
         this.mText = text;
-        mTextWidth = mTextPaint.measureText(mText);
-        Rect bounds = new Rect();
-        mTextPaint.getTextBounds(mText,0,mText.length(),bounds);
-        mTextHeight = bounds.height();
         invalidate();
     }
 
@@ -456,7 +449,11 @@ public class MaterialLoadButton extends View {
                 mButtonRectF.right = width - mScaleWidth;
                 canvas.drawRoundRect(mButtonRectF,cornerRadius,cornerRadius,mPaint);
                 if(mCurrentState == STATE_BUTTON){
-                    canvas.drawText(mText,(width-mTextWidth)/2,(height-mTextHeight)/2+mPadding*2,mTextPaint);
+                    Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+                    float top = fontMetrics.top;//为基线到字体上边框的距离,即上图中的top
+                    float bottom = fontMetrics.bottom;//为基线到字体下边框的距离,即上图中的bottom
+                    int baseLineY = (int) (height/2 - top/2 - bottom/2);//基线中间点的y轴计算公式
+                    canvas.drawText(mText,width/2,baseLineY,mTextPaint);
                     if(mTouchX > 0 || mTouchY > 0){
                         canvas.clipRect(0,mPadding,width,height-mPadding);
                         canvas.drawCircle(mTouchX,mTouchY,mRippleRadius,ripplePaint);

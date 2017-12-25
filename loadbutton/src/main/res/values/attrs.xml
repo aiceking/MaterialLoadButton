@@ -11,6 +11,7 @@
         <attr name="load_EnabledTextColor" format="reference|color" />
         <attr name="load_btnRadius" format="dimension" />
         <attr name="load_loadWidth" format="dimension" />
+        <attr name="load_textSize" format="dimension" />
         <attr name="load_loadColor" format="reference|color" />
         <attr name="load_loadSuccessColor" format="reference|color" />
         <attr name="load_loadFailedColor" format="reference|color" />
